@@ -55,6 +55,8 @@ export class App extends React.Component {
   }
 
   render() {
+    const {name, states, directionsInfo, url} = this.state.selectedPlace;
+
     return (
       <Map
         google={ this.props.google }
@@ -70,6 +72,9 @@ export class App extends React.Component {
             key={ park.id }
             onClick={ this.onMarkerClick }
             name={ park.fullName }
+            states={ park.states }
+            directionsInfo={ park.directionsInfo }
+            url={ park.url }     
             position={{ lat: this.findLat(park.latLong), lng:this.findLong(park.latLong) }}
           />)
         }
@@ -79,7 +84,9 @@ export class App extends React.Component {
           onClose={ this.onClose }
         >
           <div>
-            <h4>{ this.state.selectedPlace.name }</h4>         
+            <h4>{ name }, { states }</h4>
+              <p><h4>{ directionsInfo }</h4></p>
+              <a href={ url }>Website</a>
           </div>
         </InfoWindow>
       </Map>
