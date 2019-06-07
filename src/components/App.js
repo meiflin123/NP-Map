@@ -33,8 +33,6 @@ export class App extends React.Component {
     }
   }
 
-
-
   fetchParks = async state => {
     const response = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=${NATIONAL_PARK_SERVICE_KEY}`)
     const keywords = ["National Park", "National and State Parks", "National Parks"];
@@ -42,6 +40,14 @@ export class App extends React.Component {
                           
     this.setState({ parks: nationalParks });
     console.log(this.state.parks);
+  }
+
+  findLat = str => {
+    return str.split(' ')[0].slice(4, -1);
+  }
+
+  findLong = str => {
+    return str.split(' ')[1].slice(5);
   }
 
   componentDidMount = () => {
@@ -52,19 +58,24 @@ export class App extends React.Component {
     return (
       <Map
         google={ this.props.google }
-        zoom={ 14 }
+        zoom={ 5 }
         style={ mapStyles }
         initialCenter={{
-         lat: 37.774929,
-         lng: -122.419416
+         lat: 35.16,
+         lng: -117.87
         }}
       >
 
-        <Marker
-          onClick={ this.onMarkerClick }
-          name={ 'San Francisco' }
+        { this.state.parks.map(park => 
 
-        />
+            <Marker
+              key={ park.id }
+              onClick={ this.onMarkerClick }
+              name={ park.fullName }
+              position={{ lat: this.findLat(park.latLong), lng:this.findLong(park.latLong) }}
+            />)
+        
+        }
         <InfoWindow
               marker={ this.state.activeMarker }
               visible={ this.state.showingInfoWindow }
