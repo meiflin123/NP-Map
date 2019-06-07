@@ -2,6 +2,7 @@ import React from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { GOOGLE_MAP_KEY,NATIONAL_PARK_SERVICE_KEY } from '../config/api';
 import axios from 'axios';
+import SearchBar from './SearchBar';
 
 const mapStyles = {
   width: '100%',
@@ -58,38 +59,41 @@ export class App extends React.Component {
     const {name, states, directionsInfo, url} = this.state.selectedPlace;
 
     return (
-      <Map
-        google={ this.props.google }
-        zoom={ 5 }
-        style={ mapStyles }
-        initialCenter={{
-         lat: 35.16,
-         lng: -117.87
-        }}
-      >
-        { this.state.parks.map(park => 
-          <Marker
-            key={ park.id }
-            onClick={ this.onMarkerClick }
-            name={ park.fullName }
-            states={ park.states }
-            directionsInfo={ park.directionsInfo }
-            url={ park.url }     
-            position={{ lat: this.findLat(park.latLong), lng:this.findLong(park.latLong) }}
-          />)
-        }
-        <InfoWindow
-          marker={ this.state.activeMarker }
-          visible={ this.state.showingInfoWindow }
-          onClose={ this.onClose }
+      <div className="App">
+        <SearchBar />
+        <Map
+          google={ this.props.google }
+          zoom={ 5 }
+          style={ mapStyles }
+          initialCenter={{
+           lat: 35.16,
+           lng: -117.87
+          }}
         >
-          <div>
-            <h4>{ name }, { states }</h4>
-              <p><h4>{ directionsInfo }</h4></p>
-              <a href={ url }>Website</a>
-          </div>
-        </InfoWindow>
-      </Map>
+          { this.state.parks.map(park => 
+            <Marker
+              key={ park.id }
+              onClick={ this.onMarkerClick }
+              name={ park.fullName }
+              states={ park.states }
+              directionsInfo={ park.directionsInfo }
+              url={ park.url }     
+              position={{ lat: this.findLat(park.latLong), lng:this.findLong(park.latLong) }}
+            />)
+          }
+          <InfoWindow
+            marker={ this.state.activeMarker }
+            visible={ this.state.showingInfoWindow }
+            onClose={ this.onClose }
+          >
+            <div>
+              <h4>{ name }, { states }</h4>
+                <p><h4>{ directionsInfo }</h4></p>
+                <a href={ url }>Website</a>
+            </div>
+          </InfoWindow>
+        </Map>
+      </div>
     );
   }
 
