@@ -15,7 +15,8 @@ export class App extends React.Component {
     showingInfoWindow: false,  
     activeMarker: {},       
     selectedPlace: {},
-    parks: [],
+    parks: []
+
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -51,6 +52,16 @@ export class App extends React.Component {
     return str.split(' ')[1].slice(5);
   }
 
+  handleSearch = async term => {
+    const singlePark = this.state.parks.filter(park => park.name === term || park.fullName === term);
+    
+    await this.setState({ parks: singlePark, showingInfoWindow: false });
+    this.fetchParks('CA');
+
+    console.log('match', this.state.parks, 'showInfo', this.state.showingInfoWindow)
+  }
+
+
   componentDidMount = () => {
     this.fetchParks('CA');
   }
@@ -60,7 +71,7 @@ export class App extends React.Component {
 
     return (
       <div className="App">
-        <SearchBar />
+        <SearchBar handleSearch={this.handleSearch} parks={this.state.parks}/>
         <Map
           google={ this.props.google }
           zoom={ 5 }
