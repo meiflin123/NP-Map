@@ -32,7 +32,7 @@ export class App extends React.Component {
       });
     }
   }
-
+  
   fetchParks = async state => {
     const response = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=${NATIONAL_PARK_SERVICE_KEY}`)
     const keywords = ["National Park", "National and State Parks", "National Parks"];
@@ -65,16 +65,13 @@ export class App extends React.Component {
          lng: -117.87
         }}
       >
-
         { this.state.parks.map(park => 
-
             <Marker
               key={ park.id }
               onClick={ this.onMarkerClick }
               name={ park.fullName }
               position={{ lat: this.findLat(park.latLong), lng:this.findLong(park.latLong) }}
             />)
-        
         }
         <InfoWindow
               marker={ this.state.activeMarker }
