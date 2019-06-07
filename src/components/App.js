@@ -36,6 +36,9 @@ export class App extends React.Component {
   }
 
   fetchParks = async state => {
+    // fetch all parks of one state from National Park Service
+    // filter data --> only national parks.
+    // store found national parks to state obj.
     const response = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=${NATIONAL_PARK_SERVICE_KEY}`)
     const keywords = ["National Park", "National and State Parks", "National Parks"];
     const nationalParks = response.data.data.filter(park => keywords.includes(park.designation));
@@ -44,7 +47,7 @@ export class App extends React.Component {
     console.log(this.state.parks);
   }
 
-  findLat = str => {
+  findLat = str => { //ex str: 'latLong: "lat:41.37237268, long:-124.0318129"/'
     return str.split(' ')[0].slice(4, -1);
   }
 
@@ -53,14 +56,13 @@ export class App extends React.Component {
   }
 
   handleSearch = async term => {
+    // get the park user's looking for from stored data
+    // close InfoWindow of previous query, display only the searched park on map
+    // display all parks again
     const singlePark = this.state.parks.filter(park => park.name === term || park.fullName === term);
-    
-    await this.setState({ parks: singlePark, showingInfoWindow: false });
+    await this.setState({ parks: singlePark, showingInfoWindow: false});  
     this.fetchParks('CA');
-
-    console.log('match', this.state.parks, 'showInfo', this.state.showingInfoWindow)
   }
-
 
   componentDidMount = () => {
     this.fetchParks('CA');
