@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { GOOGLE_MAP_KEY,NATIONAL_PARK_SERVICE_KEY } from '../config/api';
+import axios from 'axios';
 
 const mapStyles = {
   width: '100%',
@@ -12,7 +13,8 @@ export class App extends React.Component {
   state = {
     showingInfoWindow: false,  
     activeMarker: {},       
-    selectedPlace: {} 
+    selectedPlace: {},
+    parks: [],
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -29,6 +31,21 @@ export class App extends React.Component {
         activeMarker: null
       });
     }
+  }
+
+
+
+  fetchParks = async state => {
+    const response = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${state}&api_key=${NATIONAL_PARK_SERVICE_KEY}`)
+    const keywords = ["National Park", "National and State Parks", "National Parks"];
+    const nationalParks = response.data.data.filter(park => keywords.includes(park.designation));
+                          
+    this.setState({ parks: nationalParks });
+    console.log(this.state.parks);
+  }
+
+  componentDidMount = () => {
+    this.fetchParks('CA');
   }
 
   render() {
