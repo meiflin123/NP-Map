@@ -1,8 +1,8 @@
 body {
   padding-top: 70px;
 }
-
 .jumbotron {
+  margin-top: 80px;
   color: #264d00;
   background: #ecf0f1;
 }

@@ -9,16 +9,16 @@ class ParksGallery extends React.Component {
       <div>
        
         <div className="container">
-        <div className="jumbotron">
-          <h1><i className="fas fa-camera-retro"></i> Title</h1>
+          <div className="jumbotron">
+            <h1><i className="fas fa-camera-retro"></i> Title</h1>
 
-        </div>
-        <div className="row">
-          <div className="col-lg-4 col-sm-6">
-            <div className="thumbnail">
-              <img alt="park" src="https://images.unsplash.com/photo-1553531384-cc64ac80f931" />
-            </div>
           </div>
+          <div className="row">
+            <div className="col-lg-4 col-sm-6">
+              <div className="thumbnail">
+                <img alt="park" src="https://images.unsplash.com/photo-1553531384-cc64ac80f931" />
+              </div>
+            </div>
          {/* <div className="col-lg-4 col-sm-6">
             <div className="thumbnail">
               <img src="https://images.unsplash.com/photo-1546627602-6feaf59bf36e" />
