@@ -7,6 +7,19 @@ body {
   background: #ecf0f1;
 }
 
+.ParksOnMap {
+  margin-top: 80px;
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+
+label {
+  margin-right : 8px;
+  font-size: 15px;
+}
+
 .navbar {
   background:#00331a;
 }

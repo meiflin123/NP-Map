@@ -81,11 +81,12 @@ export class ParksOnMap extends React.Component {
     const {name, states, directionsInfo, url} = this.state.selectedPlace;
 
     return (
-      <div className="App">
+     
+      <div className="ParksOnMap container">
         <SearchBar handleSearch={this.handleSearch} parks={this.state.parks}/>
-        <Map
+        <Map 
           google={ this.props.google }
-          zoom={ 5 }
+          zoom={ 6 }
           style={ mapStyles }
           initialCenter={{
            lat: 35.16,
@@ -117,6 +118,7 @@ export class ParksOnMap extends React.Component {
           </InfoWindow>
         </Map>
       </div>
+    
     );
   }
 

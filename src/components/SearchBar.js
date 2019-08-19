@@ -14,8 +14,8 @@ class SearchBar extends React.Component {
 
   render () {
     return (
-      <div>
-         <label>Search a park </label>
+      <div className="SearchBar">
+         <label>Search National Park </label>
          <input className="input-control" type="text" value={this.state.term} onChange={this.onInputChange}/>
          <button onClick={this.onClick}>Go!</button>
       </div>
