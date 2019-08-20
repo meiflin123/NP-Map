@@ -15,6 +15,17 @@ body {
   height:0;
 }
 
+.navbar-nav>li>a {
+  line-height: 50px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+li {
+  font-size: 15px;
+}
 label {
   margin-right : 8px;
   font-size: 15px;

@@ -22,7 +22,7 @@ const Header = () => {
               <li><Link to="/parks_on_map">See Map</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-               <li><Link to=''><GoogleAuth /></Link></li>
+               <li><Link><GoogleAuth /></Link></li>
             </ul>
           </div>
         </div>
