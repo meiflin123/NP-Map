@@ -1,9 +1,14 @@
 import React from 'react';
+import PostCreate from './PostCreate';
 
 
 const MiniBlog = () => {
 
-  return <div>MiniBlog</div>
+  return (
+    <div className="MiniBlog container">
+      <PostCreate />
+    </div>
+  ) 
 
 };
 
