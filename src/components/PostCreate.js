@@ -21,7 +21,7 @@ class PostCreate extends React.Component {
     const className =`field ${meta.error && meta.touched? 'error' : ''}`
     return(
       <div className={className}>
-        <label style={{ color: '#95b5c2', fontFamily: 'fantasy' }}>{label}</label>
+        <label style={{ color: 'green', fontFamily: 'fantasy' }}>{label}</label>
         {label === 'Enter Park'? <input style={{ border: '1px solid orange'}} onBlur={input.onBlur} onChange={input.onChange} value={input.value} /> 
         : <textarea style={{ border: '1px solid orange' }} onBlur={input.onBlur} onChange={input.onChange} value={input.value} />}
 
