@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { createMiniBlog, fetchParks } = require('../database-mysql');
+const { createMiniBlog, fetchParks, fetchMiniBlogs } = require('../database-mysql');
 const db = require('../database-mysql');
 const app = express();
 const PORT = 3001;
@@ -33,15 +33,22 @@ app.get('/parks', (req, res) => {
 })
 
 app.post('/miniBlogs', (req, res) => {
-  const { title, content, parkId, userId } = req.body
-  createMiniBlog(title, content, parkId, userId, (err, data) => {
+  const { content, parkId, userId } = req.body
+  createMiniBlog(content, parkId, userId, (err, data) => {
     if(err) {
       return; 
     }
-    res.json(data);
-    res.sendStatus(201);
   })
 
+})
+
+app.get('/miniBlogs', (req, res) => {
+  fetchMiniBlogs((err, data) => {
+    if(err) {
+      return;
+    }
+    res.json(data);
+  })
 })
 
 app.listen(PORT, () => {

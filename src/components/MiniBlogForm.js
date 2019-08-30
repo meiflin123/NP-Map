@@ -24,13 +24,12 @@ class MiniBlogCreate extends React.Component {
     return(
       <div className={className}>
         <label style={{ color: 'green', fontFamily: 'fantasy' }}>{label}</label>
-        {label === 'Enter Title'? <input style={{ border: '1px solid orange'}} onBlur={input.onBlur} onChange={input.onChange} value={input.value} /> 
-        : <textarea style={{ border: '1px solid orange' }} onBlur={input.onBlur} onChange={input.onChange} value={input.value} />}
+        <textarea style={{ border: '1px solid orange' }} onBlur={input.onBlur} onChange={input.onChange} value={input.value} />
 
         <div style={{color: '#800000'}}>{ this.renderError(meta)}</div>
 
       </div>
-    ) ;
+    );
   }
 
   onSubmit = formValues => {
@@ -57,7 +56,6 @@ class MiniBlogCreate extends React.Component {
               <option disabled selected value> -- select an option -- </option>
               { this.props.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}
             </select>
-            <Field name="title" label="Enter Title" component={ this.renderInput }/>
             <Field name="content" label="Any New Experience To Share?" component={ this.renderInput} />
             <button className="ui orange button">Share</button>
           </form>
@@ -70,9 +68,6 @@ class MiniBlogCreate extends React.Component {
 
 const validate = formValues => {
   const error = {};
-  if(!formValues.title) {
-    error.title='Please enter a title';
-  }
   if(!formValues.content) {
     error.content='Please enter some content';
   }

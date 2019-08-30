@@ -12,10 +12,10 @@ connection.connect(err => {
 });
 
 
-const createMiniBlog = (title, content, parkId, userId, callback) => {
-  const query = 'INSERT INTO miniBlogs(title, content, park_id, user_id) VALUES(?, ?, ?, ?)';
+const createMiniBlog = (content, parkId, userId, callback) => {
+  const query = 'INSERT INTO miniBlogs(content, park_id, user_id) VALUES(?, ?, ?)';
 
-  connection.query(query, [title, content, parkId, userId], callback);
+  connection.query(query, [content, parkId, userId], callback);
 
 }
 
@@ -28,9 +28,17 @@ const fetchParks = (callback) => {
     callback(null, data);
   });
 }
-
+const fetchMiniBlogs = (callback) => {
+  connection.query('SELECT * FROM MINIBLOGS', (err, data) => {
+    if(err) {
+      return callback(err);
+    }
+    callback(null, data);
+  })
+}
 
 module.exports = {
   createMiniBlog,
-  fetchParks
+  fetchParks,
+  fetchMiniBlogs
 }

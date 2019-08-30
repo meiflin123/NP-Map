@@ -7,6 +7,8 @@ import {
 
 } from '../actions/type';
 
+import _ from 'lodash';
+
 
 
 export default (state = {}, action) => {

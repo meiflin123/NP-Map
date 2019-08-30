@@ -12,7 +12,6 @@ CREATE TABLE parks (
 );
 CREATE TABLE miniBlogs (
   id int NOT NULL AUTO_INCREMENT,
-  title varchar(50) NOT NULL,
   content varchar(255) NOT NULL,
   park_id varchar(50) NOT NULL,
   user_id varchar(50) NOT NULL, 
@@ -36,5 +35,5 @@ INSERT into parks (name) VALUES ("Sequoia & Kings Canyon National Parks");
 INSERT into parks (name) VALUES ("Yosemite National Park");
 
 -- test
-INSERT into miniBlogs(title, content, park_id, user_id) VALUES ("testtitle", "testcontent", '5', '2');
+INSERT into miniBlogs(content, park_id, user_id) VALUES ("testcontent", '5', '2');
 

@@ -46,7 +46,8 @@ export const createMiniBlog = (formValues, parkId) => async (dispatch, getState)
 };
 
 export const fetchMiniBlogs = () => async dispatch => {
-  const response = await miniBlogs.get('/miniBlog')
+  const response = await miniBlogs.get('/miniBlogs')
+  console.log('fetch miniblogs', response);
   dispatch({ type: FETCH_MINIBLOGS, payload: response.data })
 };
 
