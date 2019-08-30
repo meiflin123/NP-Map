@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const createMiniBlog = require('../database-mysql').createMiniBlog;
-const fetchParks = require('../database-mysql').fetchParks;
+const { createMiniBlog, fetchParks } = require('../database-mysql');
 const db = require('../database-mysql');
 const app = express();
 const PORT = 3001;
@@ -35,8 +34,6 @@ app.get('/parks', (req, res) => {
 
 app.post('/miniBlogs', (req, res) => {
   const { title, content, parkId, userId } = req.body
-
-  console.log(title, content, typeof parkId, typeof userId)
   createMiniBlog(title, content, parkId, userId, (err, data) => {
     if(err) {
       return; 
