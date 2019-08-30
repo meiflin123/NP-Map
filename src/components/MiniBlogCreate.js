@@ -27,7 +27,7 @@ class MiniBlogCreate extends React.Component {
     return(
       <div className={className}>
         <label style={{ color: 'green', fontFamily: 'fantasy' }}>{label}</label>
-        {label === 'Enter Park'? <input style={{ border: '1px solid orange'}} onBlur={input.onBlur} onChange={input.onChange} value={input.value} /> 
+        {label === 'Enter Title'? <input style={{ border: '1px solid orange'}} onBlur={input.onBlur} onChange={input.onChange} value={input.value} /> 
         : <textarea style={{ border: '1px solid orange' }} onBlur={input.onBlur} onChange={input.onChange} value={input.value} />}
 
         <div style={{color: '#800000'}}>{ this.renderError(meta)}</div>
@@ -57,8 +57,8 @@ class MiniBlogCreate extends React.Component {
         </div>
         <div className="column">
           <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <select onChange={ this.selectPark }>{ this.state.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}</select>
-            <Field name="park" label="Enter Park" component={ this.renderInput }/>
+            <select style={{ border: '1px solid orange' }} onChange={ this.selectPark }>{ this.state.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}</select>
+            <Field name="title" label="Enter Title" component={ this.renderInput }/>
             <Field name="content" label="Any New Experience To Share?" component={ this.renderInput} />
             <button className="ui orange button">Share</button>
           </form>
@@ -71,8 +71,8 @@ class MiniBlogCreate extends React.Component {
 
 const validate = formValues => {
   const error = {};
-  if(!formValues.park) {
-    error.park='Please enter a park';
+  if(!formValues.title) {
+    error.title='Please enter a park';
   }
   if(!formValues.content) {
     error.content='Please enter some content';
