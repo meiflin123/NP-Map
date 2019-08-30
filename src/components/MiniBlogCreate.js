@@ -1,89 +1,23 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import faker from 'faker';
 import { connect } from 'react-redux';
 import { createMiniBlog, fetchParks } from '../actions';
+import MiniBlogForm from './MiniBlogForm';
 
 class MiniBlogCreate extends React.Component {
 
-  renderError({ error, touched }){
-    console.log(touched, error)
-    if(error && touched) {
-      return (
-        <div className="error message">
-          <div className="header">{error}
-          </div>
-        </div>
-      )
-    }
-
-  }
-
-  renderInput = ({ input, label, meta }) => {
-    const className =`field ${meta.error && meta.touched? 'error' : ''}`
-    return(
-      <div className={className}>
-        <label style={{ color: 'green', fontFamily: 'fantasy' }}>{label}</label>
-        {label === 'Enter Title'? <input style={{ border: '1px solid orange'}} onBlur={input.onBlur} onChange={input.onChange} value={input.value} /> 
-        : <textarea style={{ border: '1px solid orange' }} onBlur={input.onBlur} onChange={input.onChange} value={input.value} />}
-
-        <div style={{color: '#800000'}}>{ this.renderError(meta)}</div>
-
-      </div>
-    ) ;
-  }
-
-  onSubmit = formValues => {
-    this.props.createMiniBlog(formValues);
-  }
-
-  selectPark = () => {
-
-  }
-  componentDidMount = () => {
-    this.props.fetchParks();
+  onSubmit = formProps => {
+    this.props.createMiniBlog(formProps)
   }
 
   render() {
     return (
-      <div className="MiniBlogCreate row">
-        <div className="column">
-          <img alt="avatar" src={faker.image.avatar()} style={{marginTop: '23px'}}/>
-        </div>
-        <div className="column">
-          <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <select style={{ border: '1px solid orange' }} onChange={ this.selectPark }>
-              { this.props.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}
-            </select>
-            <Field name="title" label="Enter Title" component={ this.renderInput }/>
-            <Field name="content" label="Any New Experience To Share?" component={ this.renderInput} />
-            <button className="ui orange button">Share</button>
-          </form>
-        </div>
+      <div className="MiniBlogCreate">
+        
+        <MiniBlogForm onSubmit={this.onSubmit}/>
       </div>
-
-    )
+    );
   }
 }
 
-const validate = formValues => {
-  const error = {};
-  if(!formValues.title) {
-    error.title='Please enter a title';
-  }
-  if(!formValues.content) {
-    error.content='Please enter some content';
-  }
-  return error
-}
-const mapStateToProps = state => {
-  //console.log('mapStateToProps', Object.values(state.parks))
-  return {
-    parks: Object.values(state.parks)
-  }
 
-  
-}
-const formWrapped = reduxForm({form: 'MiniBlogCreate', validate: validate})(MiniBlogCreate);
-
-export default connect(mapStateToProps, { createMiniBlog, fetchParks })(formWrapped)
+export default MiniBlogCreate;

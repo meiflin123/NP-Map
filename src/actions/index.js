@@ -1,5 +1,11 @@
 import miniBlogs from '../apis/miniBlog';
-import { SIGN_IN, SIGN_OUT, FETCH_PARKS } from './type.js'
+import { 
+  SIGN_IN,
+  SIGN_OUT, 
+  FETCH_PARKS,
+  PARK_SELECTED
+
+} from './type.js'
 
 export const signIn = userId => {
   return {
@@ -14,14 +20,21 @@ export const signOut = userId => {
   };
 };
 
-export const createMiniBlog = formValues => async (dispatch) => {
-  // eslint-disable-next-line
-  const response = await miniBlogs.post('/miniBlogs', formValues);
+export const createMiniBlog = (formValues, parkId) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  console.log('here', userId)
+  const response = await miniBlogs.post('/miniBlogs', {...formValues, parkId: parkId, userId});
 };
 
 export const fetchParks = () => async (dispatch) => {
   const response = await miniBlogs.get('/parks')
   dispatch({ type: FETCH_PARKS, payload: response.data })
   console.log(response.data) // array of objects with id and name property
+}
 
+export const selectPark = (parkId) => {
+  return {
+    type: PARK_SELECTED,
+    payload: parkId
+  }
 }

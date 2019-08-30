@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { createMiniBlog, fetchParks } = require('../database-mysql');
+const createMiniBlog = require('../database-mysql').createMiniBlog;
+const fetchParks = require('../database-mysql').fetchParks;
 const db = require('../database-mysql');
 const app = express();
 const PORT = 3001;
@@ -16,7 +17,7 @@ app.use(express.static(__dirname + '../public'));
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, application/json');
   next();
 })
 
@@ -32,16 +33,18 @@ app.get('/parks', (req, res) => {
     })
 })
 
-/*app.post('/create_mini_blog', (req, res) => {
-  createMiniBlog((err, data) => {
+app.post('/miniBlogs', (req, res) => {
+  const { title, content, parkId, userId } = req.body
+
+  console.log(title, content, typeof parkId, typeof userId)
+  createMiniBlog(title, content, parkId, userId, (err, data) => {
     if(err) {
-      res.sendStatus(500).send(err)
-      return;
+      return; 
     }
-    res.join(data);
+    res.sendStatus(201);
   })
 
-})*/
+})
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
