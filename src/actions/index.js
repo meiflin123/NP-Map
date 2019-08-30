@@ -3,7 +3,12 @@ import {
   SIGN_IN,
   SIGN_OUT, 
   FETCH_PARKS,
-  PARK_SELECTED
+  PARK_SELECTED,
+  FETCH_MINIBLOGS,
+  FETCH_MINIBLOG,
+  CREATE_MINIBLOG,
+  EDIT_MINIBLOG,
+  DELETE_MINIBLOG
 
 } from './type.js'
 
@@ -20,12 +25,6 @@ export const signOut = userId => {
   };
 };
 
-export const createMiniBlog = (formValues, parkId) => async (dispatch, getState) => {
-  const { userId } = getState().auth;
-  console.log('here', userId)
-  const response = await miniBlogs.post('/miniBlogs', {...formValues, parkId: parkId, userId});
-};
-
 export const fetchParks = () => async (dispatch) => {
   const response = await miniBlogs.get('/parks')
   dispatch({ type: FETCH_PARKS, payload: response.data })
@@ -38,3 +37,32 @@ export const selectPark = (parkId) => {
     payload: parkId
   }
 }
+
+export const createMiniBlog = (formValues, parkId) => async (dispatch, getState) => {
+  const { userId } = getState().auth;
+  console.log('here', userId)
+  const response = await miniBlogs.post('/miniBlogs', {...formValues, parkId, userId});
+  dispatch({ type: CREATE_MINIBLOG, payload: response.data });
+};
+
+export const fetchMiniBlogs = () => async dispatch => {
+  const response = await miniBlogs.get('/miniBlog')
+  dispatch({ type: FETCH_MINIBLOGS, payload: response.data })
+};
+
+export const fetchMiniBlog = id => async dispatch => {
+  const response = await miniBlogs.get(`/miniBlog/${id}`)
+  dispatch({ type: FETCH_MINIBLOG, payload: response.data })
+};
+
+export const editMiniBlog = (id, formValues) => async dispatch => {
+  const response = await miniBlogs.patch(`/miniBlog/${id}`, formValues);
+  dispatch({ type: EDIT_MINIBLOG, payload: response.data })
+ 
+};
+
+export const deleteMiniBlog = id => async dispatch => {
+  // eslint-disable-next-line
+  const response = await miniBlogs.delete(`/miniBlog/${id}`);
+  dispatch({ type: DELETE_MINIBLOG, payload: id })
+};

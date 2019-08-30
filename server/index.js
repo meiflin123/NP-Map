@@ -38,6 +38,7 @@ app.post('/miniBlogs', (req, res) => {
     if(err) {
       return; 
     }
+    res.json(data);
     res.sendStatus(201);
   })
 
