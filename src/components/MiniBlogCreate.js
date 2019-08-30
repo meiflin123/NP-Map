@@ -1,8 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import faker from 'faker';
+import { connect } from 'react-redux';
+import { createMiniBlog } from '../actions';
+import miniBlog from '../apis/miniBlog';
 
-class PostCreate extends React.Component {
+class MiniBlogCreate extends React.Component {
+
+  state={ parks: []};
 
   renderError({ error, touched }){
     console.log(touched, error)
@@ -31,21 +36,28 @@ class PostCreate extends React.Component {
     ) ;
   }
 
-  onSubmit(formValues){
-    console.log(formValues);
+  onSubmit = formValues => {
+    this.props.createMiniBlog(formValues);
+  }
 
+  fetchParks = () => {
+    miniBlog.get('/parks')
+      .then(response => this.setState({ parks: response.data }))
+      .catch(error => console.log(error))
+  }
+  componentDidMount = () => {
+    this.fetchParks();
   }
 
   render() {
     return (
-      <div className="PostCreate row">
+      <div className="MiniBlogCreate row">
         <div className="column">
           <img alt="avatar" src={faker.image.avatar()} style={{marginTop: '23px'}}/>
         </div>
         <div className="column">
           <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          
-          
+            <select onChange={ this.selectPark }>{ this.state.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}</select>
             <Field name="park" label="Enter Park" component={ this.renderInput }/>
             <Field name="content" label="Any New Experience To Share?" component={ this.renderInput} />
             <button className="ui orange button">Share</button>
@@ -68,5 +80,6 @@ const validate = formValues => {
   return error
 }
 
+const formWrapped = reduxForm({form: 'MiniBlogCreate', validate: validate})(MiniBlogCreate);
 
-export default reduxForm({form: 'PostCreate', validate: validate})(PostCreate);
+export default connect(null, { createMiniBlog })(formWrapped)

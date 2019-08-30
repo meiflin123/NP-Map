@@ -10,7 +10,7 @@ CREATE TABLE parks (
   name varchar(50) NOT NULL,
   PRIMARY KEY(id)
 );
-CREATE TABLE posts (
+CREATE TABLE miniBlog (
   id int NOT NULL AUTO_INCREMENT,
   park_id int NOT NULL,
   content varchar(255) NOT NULL,

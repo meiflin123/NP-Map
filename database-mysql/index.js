@@ -11,3 +11,25 @@ connection.connect(err => {
   console.log('connected to mysql');
 });
 
+
+/*export const createMiniBlog = (parkId, callback) => {
+  connection.query('INSERT into miniBlogs (park_id, content) VALUES (?, ?)')
+}*/
+
+const fetchParks = (callback) => {
+  connection.query('SELECT * FROM PARKS', (err, data) => {
+    if(err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, data);
+  });
+}
+
+
+module.exports = {
+
+
+  fetchParks
+}

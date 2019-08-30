@@ -1,5 +1,5 @@
 import React from 'react';
-import PostCreate from './PostCreate';
+import MiniBlogCreate from './MiniBlogCreate';
 
 
 
@@ -7,7 +7,7 @@ const MiniBlog = () => {
 
   return (
     <div className="MiniBlog container">
-      <PostCreate />
+      <MiniBlogCreate />
     </div>
   ) 
 
