@@ -2,12 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import faker from 'faker';
 import { connect } from 'react-redux';
-import { createMiniBlog } from '../actions';
-import miniBlog from '../apis/miniBlog';
+import { createMiniBlog, fetchParks } from '../actions';
 
 class MiniBlogCreate extends React.Component {
-
-  state={ parks: []};
 
   renderError({ error, touched }){
     console.log(touched, error)
@@ -40,13 +37,11 @@ class MiniBlogCreate extends React.Component {
     this.props.createMiniBlog(formValues);
   }
 
-  fetchParks = () => {
-    miniBlog.get('/parks')
-      .then(response => this.setState({ parks: response.data }))
-      .catch(error => console.log(error))
+  selectPark = () => {
+
   }
   componentDidMount = () => {
-    this.fetchParks();
+    this.props.fetchParks();
   }
 
   render() {
@@ -57,7 +52,9 @@ class MiniBlogCreate extends React.Component {
         </div>
         <div className="column">
           <form className="ui form error" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-            <select style={{ border: '1px solid orange' }} onChange={ this.selectPark }>{ this.state.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}</select>
+            <select style={{ border: '1px solid orange' }} onChange={ this.selectPark }>
+              { this.props.parks.map(park => <option value={park.id} key={park.id}>{park.name}</option>)}
+            </select>
             <Field name="title" label="Enter Title" component={ this.renderInput }/>
             <Field name="content" label="Any New Experience To Share?" component={ this.renderInput} />
             <button className="ui orange button">Share</button>
@@ -72,14 +69,21 @@ class MiniBlogCreate extends React.Component {
 const validate = formValues => {
   const error = {};
   if(!formValues.title) {
-    error.title='Please enter a park';
+    error.title='Please enter a title';
   }
   if(!formValues.content) {
     error.content='Please enter some content';
   }
   return error
 }
+const mapStateToProps = state => {
+  //console.log('mapStateToProps', Object.values(state.parks))
+  return {
+    parks: Object.values(state.parks)
+  }
 
+  
+}
 const formWrapped = reduxForm({form: 'MiniBlogCreate', validate: validate})(MiniBlogCreate);
 
-export default connect(null, { createMiniBlog })(formWrapped)
+export default connect(mapStateToProps, { createMiniBlog, fetchParks })(formWrapped)
