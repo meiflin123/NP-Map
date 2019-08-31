@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createMiniBlog, fetchParks } from '../actions';
+import { createMiniBlog } from '../../actions';
 import MiniBlogForm from './MiniBlogForm';
 
 class MiniBlogCreate extends React.Component {
@@ -11,8 +11,7 @@ class MiniBlogCreate extends React.Component {
 
   render() {
     return (
-      <div className="MiniBlogCreate">
-        
+      <div className="MiniBlog">
         <MiniBlogForm onSubmit={this.onSubmit}/>
       </div>
     );
@@ -20,4 +19,4 @@ class MiniBlogCreate extends React.Component {
 }
 
 
-export default MiniBlogCreate;
+export default connect(null, {createMiniBlog })(MiniBlogCreate);

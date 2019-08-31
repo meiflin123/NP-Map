@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import faker from 'faker';
 import { connect } from 'react-redux';
-import { createMiniBlog, fetchParks, selectPark } from '../actions';
+import { createMiniBlog, fetchParks, selectPark } from '../../actions';
 
 class MiniBlogCreate extends React.Component {
 

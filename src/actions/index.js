@@ -1,4 +1,5 @@
 import miniBlogs from '../apis/miniBlog';
+import history from '../history';
 import { 
   SIGN_IN,
   SIGN_OUT, 
@@ -42,7 +43,8 @@ export const createMiniBlog = (formValues, parkId) => async (dispatch, getState)
   const { userId } = getState().auth;
   console.log('here', userId)
   const response = await miniBlogs.post('/miniBlogs', {...formValues, parkId, userId});
-  dispatch({ type: CREATE_MINIBLOG, payload: response.data });
+  //dispatch({ type: CREATE_MINIBLOG, payload: response.data });
+  history.push('/mini_blog')
 };
 
 export const fetchMiniBlogs = () => async dispatch => {

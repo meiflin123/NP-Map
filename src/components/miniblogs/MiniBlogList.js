@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMiniBlogs } from '../actions';
+import { fetchMiniBlogs } from '../../actions';
 import { Link } from 'react-router-dom';
 
 class MiniBlogList extends React.Component {
@@ -13,7 +13,7 @@ class MiniBlogList extends React.Component {
   // have EDIT/DELETE if userId is current user Id
   renderAdmin(miniBlog) {
 
-    if (miniBlog.user_id == this.props.currentUserId) {
+    if (miniBlog.user_id === this.props.currentUserId) {
       return (
         <div className="small ui buttons right floated content">
          
@@ -55,7 +55,6 @@ class MiniBlogList extends React.Component {
       <div>
         <h2>MiniBlogs</h2>
         <div className="ui celled list">{this.renderList()}</div>
-
       </div>
     );
 
