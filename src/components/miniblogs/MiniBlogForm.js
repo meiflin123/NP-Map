@@ -2,9 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import faker from 'faker';
 import { connect } from 'react-redux';
-import { createMiniBlog, fetchParks, selectPark } from '../../actions';
+import { fetchParks, selectPark } from '../../actions';
 
-class MiniBlogCreate extends React.Component {
+class MiniBlogForm extends React.Component {
 
   renderError({ error, touched }){
     console.log(touched, error)
@@ -34,7 +34,7 @@ class MiniBlogCreate extends React.Component {
 
   onSubmit = formValues => {
     //console.log('here', this.props.parkSelected)
-    this.props.createMiniBlog(formValues, this.props.parkSelected);
+    this.props.onSubmit(formValues, this.props.parkSelected);
   }
 
   selectPark = (e) => {
@@ -82,6 +82,6 @@ const mapStateToProps = state => {
 
   
 }
-const formWrapped = reduxForm({form: 'MiniBlogCreate', validate: validate})(MiniBlogCreate);
+const formWrapped = reduxForm({form: 'MiniBlogForm', validate})(MiniBlogForm);
 
-export default connect(mapStateToProps, { createMiniBlog, fetchParks, selectPark })(formWrapped)
+export default connect(mapStateToProps, { fetchParks, selectPark })(formWrapped)
