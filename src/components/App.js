@@ -8,9 +8,11 @@ import MiniBlog from './miniblogs/MiniBlog';
 //import MiniBlogList from'./miniblogs/MiniBlogList';
 import MiniBlogEdit from './miniblogs/MiniBlogEdit';
 import MiniBlogDelete from './miniblogs/MiniBlogDelete';
+import SurveyForm from './SurveyForm';
 import Header from './Header';
 import history from '../history';
 
+var pic = [{'img': 'https://images.unsplash.com/photo-1553531384-cc64ac80f931'}];
 
 
 
@@ -18,6 +20,7 @@ const App = () => {
   
   return (
     <div>
+   
       <Router history={ history }>
         <div>
           <Header />
@@ -28,6 +31,7 @@ const App = () => {
           <Route path="/mini_blog/new" exact component={ MiniBlogCreate }/>
           <Route path="/mini_blog/edit/:id" exact component={MiniBlogEdit }/>
           <Route path="/mini_blog/delete/:id" exact component={MiniBlogDelete }/>
+          <Route path="/survey" exact component={ SurveyForm } />
         </div>
       </Router>
     </div>

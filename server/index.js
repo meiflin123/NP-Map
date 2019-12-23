@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const { createMiniBlog, fetchParks, fetchMiniBlogs } = require('../database-mysql');
 const db = require('../database-mysql');
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 
 app.use(bodyParser.json());
@@ -19,7 +19,6 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type, application/json');
   next();
 })
-
 
 app.get('/parks', (req, res) => {
   console.log('here')

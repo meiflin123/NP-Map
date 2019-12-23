@@ -1,0 +1,119 @@
+form{
+  padding: 10% 25%;
+  margin: 0 auto;
+}
+
+h1, h2{
+  margin: 11px 0px;
+  width: 100%;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: #777582;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 34px;
+  color: #1B1A21;
+}
+
+.form-field{
+  padding: 0.5rem;
+}
+
+.form-field label, p{
+  font-weight: bold;
+  font-size: 13px;
+  color: #4C4A57;
+  padding: 6px;
+}
+
+
+
+.form-field input[type="email"], select{
+  width: 100%;
+  height: 32px;
+  background: #F3F3F5;
+  border-radius: 4px;
+  margin-top: 6px;
+  border: none;
+}
+
+::placeholder, select {
+  padding: 10px 232px 10px 12px;
+  font-size: 14px;
+  color: grey;
+};
+
+ul.radios  { 
+  margin: 0; 
+  padding: 0; 
+  margin-left: 20px; 
+  list-style: none; 
+} 
+
+ul.radios li input { 
+  margin-right: .75em; 
+} 
+
+ul.radios li { 
+  height: 20px;
+  border: 2px transparent solid; 
+  display:inline-block;
+  margin-right: 1.5em;
+  width:12em;
+} 
+
+ul.radios li:hover, 
+ul.radios li.pressed  { 
+  border: none;
+  width: 12em; 
+  color: green;
+} 
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #6B8E23;
+  content: '';
+  display: inline-block;
+  border: 2px solid white;
+}
+
+form > button{
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  background: #6B8E23;
+  border-radius: 4px;
+}
+
+button span{
+  height: 20px;
+  left: 16px;
+  right: 16px;
+  top: calc(50% - 20px/2);
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+.error::after{
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #C41337;
+  content: attr(data-errormsg);
+} 
+

@@ -20,9 +20,11 @@ const Header = () => {
             <ul className="nav navbar-nav">
               <li><Link to="/mini_blog">Mini Blog</Link></li>
               <li><Link to="/parks_on_map">See Map</Link></li>
+
             </ul>
             <ul className="nav navbar-nav navbar-right">
                <li><Link><GoogleAuth /></Link></li>
+               <li><Link to="/survey">Fill a Survey</Link></li>
             </ul>
           </div>
         </div>

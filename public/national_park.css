@@ -1,10 +1,20 @@
 body {
   padding-top: 70px;
 }
+
+li {
+  font-size: 15px;
+}
+label {
+  margin-right : 8px;
+  font-size: 15px;
+}
+
+
 .jumbotron {
   margin-top: 80px;
   color: #264d00;
-  background: #ecf0f1;
+  background-image: url('header.jpeg')
 }
 
 .ParksOnMap {
@@ -29,13 +39,7 @@ body {
     padding-top: 2px;
     padding-bottom: 2px;
 }
-li {
-  font-size: 15px;
-}
-label {
-  margin-right : 8px;
-  font-size: 15px;
-}
+
 
 .navbar {
   background:#00331a;
@@ -52,3 +56,9 @@ label {
   clear: both;
   display: table;
 }
+
+#add-pic {
+  display: inline;
+  margin-left: 2em;
+}
+
